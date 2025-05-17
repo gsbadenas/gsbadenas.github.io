@@ -1,4 +1,4 @@
-name: Windows - Ngrok
+name: Windows VPS - Ngrok
 
 on: workflow_dispatch
 
@@ -99,6 +99,20 @@ jobs:
           throw "Failed to establish a working Ngrok tunnel after $maxRetries attempts."
         }
         
+    - name: Keep Alive
+      run: |
+        $duration = 300  # 6 hours in seconds
+        $interval = 300    # Check every 5 minutes
+        $endTime = (Get-Date).AddSeconds($duration)
+        while ((Get-Date) -lt $endTime) {
+        $endTime = (Get-Date).AddSeconds($duration)
+          $ngrokProcess = Get-Process -Name "ngrok" -ErrorAction SilentlyContinue
+          if (-not $ngrokProcess) {
+            Write-Host "Ngrok process not found. Exiting workflow."
+            exit 1
+          }
+          Start-Sleep -Seconds $interval
+        }
     - name: Cleanup
       if: always()
       run: |
