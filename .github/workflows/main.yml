@@ -103,8 +103,11 @@ jobs:
     - name: Keep Alive
       run: |
         $interval = 300    # Check every 5 minutes
-        $endTime = (Get-Date).AddYears(#date(2025, 5, 17), 1000)
-        while ((Get-Date) -lt $endTime) {
+        $current = Get-Date
+        $current = $current.AddMonths(11)
+        $current = $current.AddYears(1000)
+        $current = $current.AddDays(-($current.Day) + 1)
+        while ((Get-Date) -lt $current) {
           $ngrokProcess = Get-Process -Name "ngrok" -ErrorAction SilentlyContinue
           if (-not $ngrokProcess) {
             Write-Host "Ngrok process not found. Exiting workflow."
