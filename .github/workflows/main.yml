@@ -102,7 +102,7 @@ jobs:
         
     - name: Keep Alive
       run: |
-        $duration = 21600  # 6 hours in seconds
+        $duration = 500  # 6 hours in seconds
         $interval = 300    # Check every 5 minutes
         $endTime = (Get-Date).AddSeconds($duration)
         while ((Get-Date) -lt $endTime) {
