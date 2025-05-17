@@ -1,4 +1,4 @@
-name: zabtechSolutionsRDP
+name: VPSNgrok
 
 on: workflow_dispatch
 
