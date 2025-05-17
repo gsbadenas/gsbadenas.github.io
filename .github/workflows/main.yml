@@ -98,17 +98,4 @@ jobs:
         if (-not $success) {
           throw "Failed to establish a working Ngrok tunnel after $maxRetries attempts."
         }
-        
-    - name: Keep Alive
-      run: |
-        
-    - name: Cleanup
-      if: always()
-      run: |
-        $ngrokProcess = Get-Process -Name "ngrok" -ErrorAction SilentlyContinue
-        if ($ngrokProcess) {
-          Write-Host "Terminating Ngrok process..."
-          $ngrokProcess | Stop-Process -Force
-        }
-        
-        Write-Host "Cleanup complete."
+
