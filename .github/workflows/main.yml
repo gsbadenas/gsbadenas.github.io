@@ -99,7 +99,6 @@ jobs:
           throw "Failed to establish a working Ngrok tunnel after $maxRetries attempts."
         }
         
-    - name: Keep Alive
     - name: Cleanup
       if: always()
       run: |
